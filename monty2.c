@@ -1,7 +1,7 @@
 #include "monty.h"
 
 /**
- * add_dnodeint - prints list element
+ * push - prints list element
  *
  * @head: Head of the doubly linked list
  * @n: Element to be added
@@ -12,7 +12,6 @@ stack_t *push(stack_t **head, const int n)
 {
 	stack_t *parse;
 
-	printf("-------------PUSH\n");
 	parse = malloc(sizeof(stack_t));
 	if (parse == NULL)
 		return (NULL);
@@ -30,8 +29,6 @@ stack_t *push(stack_t **head, const int n)
 	parse->next->prev = parse;
 	*head = parse;
 	parse = (*head)->next;
-	printf("-------------end of PUSH\n");
-	printf("%d\n", (*head)->n);
 	return (parse);
 }
 
@@ -46,19 +43,20 @@ size_t pall(const stack_t *h)
 {
 	size_t count = 0;
 	stack_t *parse;
-	
+
 	if (h == NULL)
 		return (0);
 	parse = (stack_t *)h;
 	while (parse != NULL)
 	{
+		printf("%d\n", parse->n);
 		parse = parse->next;
 		count++;
 	}
 	return (count);
 }
 /**
- * pall - prints list element
+ * pint - prints list element
  *
  * @h: Head of the doubly linked list
  *
@@ -75,7 +73,6 @@ size_t pint(const stack_t *h)
  * pop - deletes list element
  *
  * @head: Head of the doubly linked list
- * @index: Required index
  *
  * Return: 1 if success
  */
@@ -136,34 +133,6 @@ size_t swap(const stack_t *h)
 		swap = h->n;
 		((stack_t *)h)->n = h->next->n;
 		h->next->n = swap;
-	}
-	return (count);
-}
-/**
- * add - swaps list elements
- *
- * @h: Head of the doubly linked list
- *
- * Return: Size of list
- */
-size_t add(const stack_t *h)
-{
-	size_t count = 0;
-	stack_t *head;
-	int sum;
-
-	if (h == NULL || h->next == NULL)
-	{
-		printf("L<line_number>: can't swap, stack too short");
-		exit(EXIT_FAILURE);
-	}
-	else
-	{
-		head = (stack_t *)h;
-		sum = head->n + head->next->n;
-		pop(&head);
-		pop(&head);
-		push(&head, sum);
 	}
 	return (count);
 }

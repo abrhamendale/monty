@@ -42,9 +42,9 @@ typedef struct instruction_s
 	void (*f)(stack_t **stack, unsigned int line_number);
 } instruction_t;
 int _atoi(char *format, int k, int l);
-int checkpush(char *s1, int k, int *start, int *end);
+int checkpush(char *s1, int k, int *start, int *end, int *line_n);
 int checkcmd(char *s1, char *s2, int j);
-int checkline(char *s, stack_t **head);
+int checkline(char *s, stack_t **head, int *line_n);
 stack_t *push(stack_t **head, const int n);
 size_t pall(const stack_t *h);
 int pop(stack_t **head);
