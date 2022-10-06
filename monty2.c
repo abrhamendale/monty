@@ -66,6 +66,8 @@ size_t pint(const stack_t *h)
 {
 	if (h != NULL)
 		printf("%d\n", h->n);
+	else
+		printf("L<line_number>: can't pint, stack empty");
 	printf("\n");
 	return (1);
 }
