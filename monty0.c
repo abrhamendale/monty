@@ -148,9 +148,24 @@ int checkline(char *s, stack_t **head, int *line_n)
 			push(head, _atoi(s, start + i + 4, end + start - 1));
 			return (1);
 		}
-		else if (checkcmd(s, "pall", i)/* && checkcmdend(s, i + 4)*/)
+		else if (checkcmd(s, "pall", i))
 		{
 			pall(*head);
+			break;
+		}
+		else if (checkcmd(s, "pint", i))
+		{
+			pint(*head);
+			break;
+		}
+		else if (checkcmd(s, "pop", i))
+		{
+			pop(head);
+			break;
+		}
+		else if (checkcmd(s, "add", i))
+		{
+			add(*head);
 			break;
 		}
 	}
