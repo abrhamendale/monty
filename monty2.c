@@ -4,7 +4,7 @@
  * push - prints list element
  *
  * @head: Head of the doubly linked list
- * @n: Element to be added
+ * @n: element to be added
  *
  * Return: Size of list
  */
@@ -12,6 +12,7 @@ stack_t *push(stack_t **head, const int n)
 {
 	stack_t *parse;
 
+	/*printf("---------------PUSH\n");*/
 	parse = malloc(sizeof(stack_t));
 	if (parse == NULL)
 		return (NULL);
@@ -36,59 +37,61 @@ stack_t *push(stack_t **head, const int n)
  * pall - prints list element
  *
  * @h: Head of the doubly linked list
+ * @line_n: Line number
  *
  * Return: Size of list
  */
-size_t pall(const stack_t *h)
+void pall(stack_t **h, unsigned int line_n)
 {
-	size_t count = 0;
 	stack_t *parse;
 
-	if (h == NULL)
-		return (0);
-	parse = (stack_t *)h;
+	parse = *h;
+	if (*h == NULL)
+	{
+		printf("L%u Stack empty\n", line_n);
+		exit(EXIT_FAILURE);
+	}
 	while (parse != NULL)
 	{
 		printf("%d\n", parse->n);
 		parse = parse->next;
-		count++;
 	}
-	return (count);
 }
 /**
  * pint - prints list element
  *
  * @h: Head of the doubly linked list
+ * @line_n: Line number
  *
  * Return: Size of list
  */
-size_t pint(const stack_t *h)
+void pint(stack_t **h, unsigned int line_n)
 {
-	if (h != NULL)
-		printf("%d\n", h->n);
+	if (*h != NULL)
+		printf("%d\n", (*h)->n);
 	else
-		printf("L<line_number>: can't pint, stack empty");
+		printf("L%d: can't pint, stack empty", line_n);
 	printf("\n");
-	return (1);
 }
 /**
  * pop - deletes list element
  *
  * @head: Head of the doubly linked list
+ * @line_n: Line number
  *
  * Return: 1 if success
  */
-int pop(stack_t **head)
+void pop(stack_t **head, unsigned int line_n)
 {
 	stack_t *parse;
 	unsigned int i = 0, index = 0;
 
+	parse = *head;
 	if (*head == NULL)
 	{
-		printf("L<line_number>: can't pop an empty stack\n");
+		printf("L%d: can't pop an empty stack\n", line_n);
 		exit(EXIT_FAILURE);
 	}
-	parse = *head;
 	while (parse != NULL)
 	{
 		if (i == index)
@@ -106,35 +109,33 @@ int pop(stack_t **head)
 					parse->next->prev = NULL;
 			}
 			free(parse);
-			return (1);
+			break;/*exit(EXIT_SUCCESS);*/
 		}
 		i++;
 		parse = parse->next;
 	}
-	return (-1);
 }
 /**
  * swap - swaps list elements
  *
  * @h: Head of the doubly linked list
+ * @line_n: Line number
  *
  * Return: Size of list
  */
-size_t swap(const stack_t *h)
+void swap(stack_t **h, unsigned int line_n)
 {
-	size_t count = 0;
 	int swap;
 
-	if (h == NULL || h->next == NULL)
+	if (*h == NULL || (*h)->next == NULL)
 	{
-		printf("L<line_number>: can't swap, stack too short");
+		printf("L%d: can't swap, stack too short", line_n);
 		exit(EXIT_FAILURE);
 	}
 	else
 	{
-		swap = h->n;
-		((stack_t *)h)->n = h->next->n;
-		h->next->n = swap;
+		swap = (*h)->n;
+		(*h)->n = (*h)->next->n;
+		(*h)->next->n = swap;
 	}
-	return (count);
 }

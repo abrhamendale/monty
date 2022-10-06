@@ -27,22 +27,27 @@ int _atoi(char *format, int k, int l)
 	return (sum);
 }
 /**
- * checkcmdend - searches for '$' inside a string
+ * checkcomment - searches for '$' inside a string
  *
  * @s: Input string
- * @l: Starting point of the string
  *
  * Return: Exit status
  */
-int checkcmdend(char *s, int l)
+int checkcomment(char *s)
 {
 	int i;
 
-	for (i = 0 ; i < (int)strlen(s) ; i++)
-	{
-		if (s[l + i] == '$')
-			return (1);
-	}
+	for (i = 0 ; s[i] == ' ' ; )
+		i++;
+	if (s[i] == '#')
+		return (1);
+	/**
+	 *for (i = 0 ; i < (int)strlen(s) ; i++)
+	 *{
+	 *	if (s[l + i] == '$')
+	 *		return (1);
+	 *}
+	 */
 	return (0);
 }
 /**
@@ -57,7 +62,7 @@ int checkcmdend(char *s, int l)
  * Return: Exit status
  */
 
-int checkpush(char *s1, int k, int *start, int *end, int *line_n)
+int checkpush(char *s1, int k, int *start, int *end, unsigned int *line_n)
 {
 	unsigned int i = 0, l;
 
@@ -65,7 +70,7 @@ int checkpush(char *s1, int k, int *start, int *end, int *line_n)
 	{
 		if ((k + 4) == (int)strlen(s1))
 		{
-			printf("L%d: usage:push integer\n", *line_n);
+			printf("L%u: usage:push integer\n", *line_n);
 			return (0);
 		}
 		*end = k + 4;
@@ -79,7 +84,7 @@ int checkpush(char *s1, int k, int *start, int *end, int *line_n)
 			{
 				if ((int)s1[k + 4 + i + l] < 48 || (int)s1[k + 4 + i + l] > 57)
 				{
-					printf("L%d: usage:push integer\n", *line_n);
+					printf("L%u: usage:push integer\n", *line_n);
 					return (0);
 				}
 				(*end)++;
@@ -88,7 +93,7 @@ int checkpush(char *s1, int k, int *start, int *end, int *line_n)
 			if (i + 4 + l + k == strlen(s1) || s1[k + 4 + i + l] == '\n'
 					|| s1[k + 4 + i + l] == ' ')
 				return (1);
-			printf("L%d: usage:push integer\n", *line_n);
+			printf("L%u: usage:push integer\n", *line_n);
 			exit(EXIT_FAILURE);
 		}
 	}
@@ -128,45 +133,31 @@ int checkcmd(char *s1, char *s2, int j)
  * Return: Exit status
  */
 
-int checkline(char *s, stack_t **head, int *line_n)
+int checkline(char *s, stack_t **head, unsigned int *line_n)
 {
 	int start, end;
-	unsigned int i;
-	/*
-	 * instruction_t m[] = {{push, }, {pall, }, {pint, }, {pop, }
-		*, {swap, }, {add, }, {nop, }, {sub, }, {div, }, {mul, }
-		*, {mod, }, {pchar, }, {pstr, }, {rotl, }, {rotr, }, {stack, }
-		*, {queue, }};
-	*/
+	unsigned int i, j;
+	instruction_t op[] = {{"pall", pall}, {"pint", pint}, {"swap", swap}
+		, {"add", add}, {"pop", pop}, {"ssub", ssub}, {"sdiv", sdiv}, {"smul", smul}
+		, {"mod", smod}, {"pchar", pchar}, {"pstr", pstr}, {"rotl", rotl}};
 
+	/*printf("----------------Checkline\n");*/
 	for (i = 0 ; i < strlen(s) ; i++)
 	{
-		if (s[i] == '$')
-			return (0);
+		if (checkcomment(s))
+			return (1);
 		if (checkpush(s, i, &start, &end, line_n))
 		{
 			push(head, _atoi(s, start + i + 4, end + start - 1));
 			return (1);
 		}
-		else if (checkcmd(s, "pall", i))
+		for (j = 0 ; j < 12 ; j++)
 		{
-			pall(*head);
-			break;
-		}
-		else if (checkcmd(s, "pint", i))
-		{
-			pint(*head);
-			break;
-		}
-		else if (checkcmd(s, "pop", i))
-		{
-			pop(head);
-			break;
-		}
-		else if (checkcmd(s, "add", i))
-		{
-			add(*head);
-			break;
+			if (checkcmd(s, op[j].opcode, i))
+			{
+				op[j].f(head, *line_n);
+				return (1);
+			}
 		}
 	}
 	return (0);

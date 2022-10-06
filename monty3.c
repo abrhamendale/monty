@@ -4,28 +4,130 @@
  * add - swaps list elements
  *
  * @h: Head of the doubly linked list
+ * @line_n: Line number
  *
  * Return: Size of list
  */
-size_t add(const stack_t *h)
+void add(stack_t **h, unsigned int line_n)
 {
-	size_t count = 0;
-	stack_t *head;
 	int sum;
 
-	if (h == NULL || h->next == NULL)
+	if (*h == NULL || (*h)->next == NULL)
 	{
-		printf("L<line_number>: can't swap, stack too short");
+		printf("L%u: can't swap, stack too short", line_n);
 		exit(EXIT_FAILURE);
 	}
 	else
 	{
-		head = (stack_t *)h;
-		sum = head->n + head->next->n;
-		pop(&head);
-		pop(&head);
-		push(&head, sum);
+		/*head = (stack_t *)h;*/
+		sum = (*h)->n + (*h)->next->n;
+		pop(h, line_n);
+		pop(h, line_n);
+		push(h, sum);
 	}
-	return (count);
+}
+/**
+ * ssub - swaps list elements
+ *
+ * @h: Head of the doubly linked list
+ * @line_n: Line number
+ *
+ * Return: Size of list
+ */
+void ssub(stack_t **h, unsigned int line_n)
+{
+	int sum;
+
+	if (*h == NULL || (*h)->next == NULL)
+	{
+		printf("L%u: can't swap, stack too short", line_n);
+		exit(EXIT_FAILURE);
+	}
+	else
+	{
+		/*head = (stack_t *)h;*/
+		sum = (*h)->n - (*h)->next->n;
+		pop(h, line_n);
+		pop(h, line_n);
+		push(h, sum);
+	}
+}
+/**
+ * smul - swaps list elements
+ *
+ * @h: Head of the doubly linked list
+ * @line_n: Line number
+ *
+ * Return: Size of list
+ */
+void smul(stack_t **h, unsigned int line_n)
+{
+	int sum;
+
+	if (*h == NULL || (*h)->next == NULL)
+	{
+		printf("L%u: can't swap, stack too short", line_n);
+		exit(EXIT_FAILURE);
+	}
+	else
+	{
+		/*head = (stack_t *)h;*/
+		sum = ((*h)->n) * ((*h)->next->n);
+		pop(h, line_n);
+		pop(h, line_n);
+		push(h, sum);
+	}
+}
+/**
+ * sdiv - swaps list elements
+ *
+ * @h: Head of the doubly linked list
+ * @line_n: Line number
+ *
+ * Return: Size of list
+ */
+void sdiv(stack_t **h, unsigned int line_n)
+{
+	int sum;
+
+	if (*h == NULL || (*h)->next == NULL)
+	{
+		printf("L%u: can't swap, stack too short", line_n);
+		exit(EXIT_FAILURE);
+	}
+	else
+	{
+		/*head = (stack_t *)h;*/
+		sum = ((*h)->n) / ((*h)->next->n);
+		pop(h, line_n);
+		pop(h, line_n);
+		push(h, sum);
+	}
+}
+/**
+ * smod - swaps list elements
+ *
+ * @h: Head of the doubly linked list
+ * @line_n: Line number
+ *
+ * Return: Size of list
+ */
+void smod(stack_t **h, unsigned int line_n)
+{
+	int sum;
+
+	if (*h == NULL || (*h)->next == NULL)
+	{
+		printf("L%u: can't swap, stack too short", line_n);
+		exit(EXIT_FAILURE);
+	}
+	else
+	{
+		/*head = (stack_t *)h;*/
+		sum = ((*h)->n) % ((*h)->next->n);
+		pop(h, line_n);
+		pop(h, line_n);
+		push(h, sum);
+	}
 }
 

@@ -15,7 +15,7 @@ int main(int argc, char *argv[])
 	char *line = NULL;
 	size_t len = 0;
 	ssize_t nread = 0;
-	int l = 0;
+	unsigned int l = 0;
 	stack_t *head;
 
 	head = NULL;
