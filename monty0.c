@@ -65,7 +65,7 @@ int checkpush(char *s1, int k, int *start, int *end, int *line_n)
 	{
 		if ((k + 4) == (int)strlen(s1))
 		{
-			printf("L%d: unknown instruction <opcode>\n", *line_n);
+			printf("L%d: usage:push integer\n", *line_n);
 			return (0);
 		}
 		*end = k + 4;
@@ -79,7 +79,7 @@ int checkpush(char *s1, int k, int *start, int *end, int *line_n)
 			{
 				if ((int)s1[k + 4 + i + l] < 48 || (int)s1[k + 4 + i + l] > 57)
 				{
-					printf("L%d: unknown instruction <opcode>\n", *line_n);
+					printf("L%d: usage:push integer\n", *line_n);
 					return (0);
 				}
 				(*end)++;
