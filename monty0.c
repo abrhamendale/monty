@@ -59,34 +59,33 @@ int checkcmdend(char *s, int l)
 
 int checkpush(char *s1, int k, int *start, int *end, int *line_n)
 {
-	unsigned int i, l;
+	unsigned int i = 0, l;
 
 	if (checkcmd(s1, "push", k))
 	{
 		if ((k + 4) == (int)strlen(s1))
 		{
-			printf("L%d: unknown instruction <opcode>/n", *line_n);
+			printf("L%d: unknown instruction <opcode>\n", *line_n);
 			return (0);
 		}
-		if (!checkcmdend(s1, k + 4))
-			return (0);
 		*end = k + 4;
 		for (l = 0 ; s1[k + 4 + l] == ' ' ;)
 			l++;
 		/*if (s1[k + 4] == ' ')*/
 		if ((int)s1[k + 4 + l] > 48 || (int)s1[k + 4 + l] < 57)
 		{
-			for (i = 0 ; s1[k + 4 + i + l] != ' ' && s1[k + 4 + i + l] != '$' ; i++)
+			for (i = 0 ; s1[k + 4 + i + l] != ' ' && s1[k + 4 + i + l]
+					!= '\n' && k + 4 + l + i != strlen(s1) ; i++)
 			{
 				if ((int)s1[k + 4 + i + l] < 48 || (int)s1[k + 4 + i + l] > 57)
 				{
-					printf("L%d: unknown instruction <opcode>/n", *line_n);
+					printf("L%d: unknown instruction <opcode>\n", *line_n);
 					return (0);
 				}
 				(*end)++;
 			}
 			*start = l;
-			if (i + 4 + l + k == strlen(s1) || s1[k + 4 + i + l] == '$'
+			if (i + 4 + l + k == strlen(s1) || s1[k + 4 + i + l] == '\n'
 					|| s1[k + 4 + i + l] == ' ')
 				return (1);
 			printf("L%d: usage:push integer\n", *line_n);
@@ -133,6 +132,12 @@ int checkline(char *s, stack_t **head, int *line_n)
 {
 	int start, end;
 	unsigned int i;
+	/*
+	 * instruction_t m[] = {{push, }, {pall, }, {pint, }, {pop, }
+		*, {swap, }, {add, }, {nop, }, {sub, }, {div, }, {mul, }
+		*, {mod, }, {pchar, }, {pstr, }, {rotl, }, {rotr, }, {stack, }
+		*, {queue, }};
+	*/
 
 	for (i = 0 ; i < strlen(s) ; i++)
 	{
@@ -143,7 +148,7 @@ int checkline(char *s, stack_t **head, int *line_n)
 			push(head, _atoi(s, start + i + 4, end + start - 1));
 			return (1);
 		}
-		else if (checkcmd(s, "pall", i) && checkcmdend(s, i + 4))
+		else if (checkcmd(s, "pall", i)/* && checkcmdend(s, i + 4)*/)
 		{
 			pall(*head);
 			break;
