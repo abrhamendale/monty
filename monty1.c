@@ -15,13 +15,13 @@ int main(int argc, char *argv[])
 	char *line = NULL;
 	size_t len = 0;
 	ssize_t nread = 0;
-	unsigned int l = 0;
+	unsigned int l = 1;
 	stack_t *head;
 
 	head = NULL;
 	if (argc != 2)
 	{
-		fprintf(stderr, "USAGE:monty %s\n", argv[1]);
+		fprintf(stderr, "USAGE:monty file\n");
 		exit(EXIT_FAILURE);
 	}
 	stream = fopen(argv[1], "r");
