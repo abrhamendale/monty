@@ -16,6 +16,8 @@ int _atoi(char *format, int k, int l)
 
 	for (i = k ; i <= l ; i++)
 	{
+		if (format[i] == '-')
+			continue;
 		if (i == k)
 			sum = (int)format[k] - 48;
 		else
@@ -24,6 +26,8 @@ int _atoi(char *format, int k, int l)
 			sum += (int)format[i] - 48;
 		}
 	}
+	if (format[k] == '-')
+		sum = -1 * sum;
 	return (sum);
 }
 /**
@@ -75,23 +79,22 @@ int checkpush(char *s1, int k, int *start, int *end, unsigned int *line_n)
 			fprintf(stderr, "L%u: usage:push integer\n", *line_n);
 			return (0);
 		}
-		else
-			return (0);
 		*end = k + 4;
 		/*if (s1[k + 4] == ' ')*/
-		if ((int)s1[k + 4 + l] > 48 && (int)s1[k + 4 + l] < 57 
-				&& k + 4 + l < strlen(s1))
+		if ((((int)s1[k + 4 + l] >= 48 && (int)s1[k + 4 + l] < 57) || 
+					s1[k + 4 + l] == '-') && k + 4 + l < strlen(s1))
 		{
-			for (i = 0 ; s1[k + 4 + i + l] != ' ' && s1[k + 4 + i + l]
+			for (i = 1 ; s1[k + 4 + i + l] != ' ' && s1[k + 4 + i + l]
 					!= '\n' && k + 4 + l + i != strlen(s1) ; i++)
 			{
-				if ((int)s1[k + 4 + i + l] < 48 || (int)s1[k + 4 + i + l] > 57)
+				if ((int)s1[k + 4 + i + l] <= 48 || (int)s1[k + 4 + i + l] > 57)
 				{
 					fprintf(stderr, "L%u: usage:push integer\n", *line_n);
 					return (0);
 				}
 				(*end)++;
 			}
+			(*end)++;
 			*start = l;
 			if (i + 4 + l + k == strlen(s1) || s1[k + 4 + i + l] == '\n'
 					|| s1[k + 4 + i + l] == ' ')
