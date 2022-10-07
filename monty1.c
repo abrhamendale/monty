@@ -21,7 +21,7 @@ int main(int argc, char *argv[])
 	head = NULL;
 	if (argc != 2)
 	{
-		fprintf(stderr, "Usage:monty %s\n", argv[1]);
+		fprintf(stderr, "USAGE:monty %s\n", argv[1]);
 		exit(EXIT_FAILURE);
 	}
 	stream = fopen(argv[1], "r");

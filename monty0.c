@@ -68,16 +68,19 @@ int checkpush(char *s1, int k, int *start, int *end, unsigned int *line_n)
 
 	if (checkcmd(s1, "push", k))
 	{
-		if ((k + 4) == (int)strlen(s1))
+		for (l = 0 ; s1[k + 4 + l] == ' ' ;)
+			l++;
+		if ((int)(k + 4 + l) == (int)strlen(s1))
 		{
 			fprintf(stderr, "L%u: usage:push integer\n", *line_n);
 			return (0);
 		}
+		else
+			return (0);
 		*end = k + 4;
-		for (l = 0 ; s1[k + 4 + l] == ' ' ;)
-			l++;
 		/*if (s1[k + 4] == ' ')*/
-		if ((int)s1[k + 4 + l] > 48 || (int)s1[k + 4 + l] < 57)
+		if ((int)s1[k + 4 + l] > 48 && (int)s1[k + 4 + l] < 57 
+				&& k + 4 + l < strlen(s1))
 		{
 			for (i = 0 ; s1[k + 4 + i + l] != ' ' && s1[k + 4 + i + l]
 					!= '\n' && k + 4 + l + i != strlen(s1) ; i++)
