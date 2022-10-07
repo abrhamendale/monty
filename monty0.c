@@ -70,7 +70,7 @@ int checkpush(char *s1, int k, int *start, int *end, unsigned int *line_n)
 	{
 		if ((k + 4) == (int)strlen(s1))
 		{
-			printf("L%u: usage:push integer\n", *line_n);
+			fprintf(stderr, "L%u: usage:push integer\n", *line_n);
 			return (0);
 		}
 		*end = k + 4;
@@ -84,7 +84,7 @@ int checkpush(char *s1, int k, int *start, int *end, unsigned int *line_n)
 			{
 				if ((int)s1[k + 4 + i + l] < 48 || (int)s1[k + 4 + i + l] > 57)
 				{
-					printf("L%u: usage:push integer\n", *line_n);
+					fprintf(stderr, "L%u: usage:push integer\n", *line_n);
 					return (0);
 				}
 				(*end)++;
@@ -93,7 +93,7 @@ int checkpush(char *s1, int k, int *start, int *end, unsigned int *line_n)
 			if (i + 4 + l + k == strlen(s1) || s1[k + 4 + i + l] == '\n'
 					|| s1[k + 4 + i + l] == ' ')
 				return (1);
-			printf("L%u: usage:push integer\n", *line_n);
+			fprintf(stderr, "L%u: usage:push integer\n", *line_n);
 			exit(EXIT_FAILURE);
 		}
 	}
@@ -139,7 +139,8 @@ int checkline(char *s, stack_t **head, unsigned int *line_n)
 	unsigned int i, j;
 	instruction_t op[] = {{"pall", pall}, {"pint", pint}, {"swap", swap}
 		, {"add", add}, {"pop", pop}, {"ssub", ssub}, {"sdiv", sdiv}, {"smul", smul}
-		, {"mod", smod}, {"pchar", pchar}, {"pstr", pstr}, {"rotl", rotl}};
+		, {"mod", smod}, {"pchar", pchar}, {"pstr", pstr}, {"rotl", rotl}
+		, {"rotr", rotr}};
 
 	/*printf("----------------Checkline\n");*/
 	for (i = 0 ; i < strlen(s) ; i++)
@@ -151,7 +152,7 @@ int checkline(char *s, stack_t **head, unsigned int *line_n)
 			push(head, _atoi(s, start + i + 4, end + start - 1));
 			return (1);
 		}
-		for (j = 0 ; j < 12 ; j++)
+		for (j = 0 ; j <= 12 ; j++)
 		{
 			if (checkcmd(s, op[j].opcode, i))
 			{

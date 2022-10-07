@@ -8,6 +8,9 @@ push 7
 push 8
 push 9
 push 0
+nop
 pall
 rotl
+pall
+rotr
 pall

@@ -60,4 +60,5 @@ void sdiv(stack_t **h, unsigned int line_n);
 void smod(stack_t **h, unsigned int line_n);
 void nop(stack_t **h, unsigned int line_n);
 void rotl(stack_t **h, unsigned int line_n);
+void rotr(stack_t **h, unsigned int line_n);
 #endif /* MONTY_H */

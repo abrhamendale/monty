@@ -14,7 +14,7 @@ void add(stack_t **h, unsigned int line_n)
 
 	if (*h == NULL || (*h)->next == NULL)
 	{
-		printf("L%u: can't swap, stack too short", line_n);
+		fprintf(stderr, "L%u: can't swap, stack too short", line_n);
 		exit(EXIT_FAILURE);
 	}
 	else
@@ -40,7 +40,7 @@ void ssub(stack_t **h, unsigned int line_n)
 
 	if (*h == NULL || (*h)->next == NULL)
 	{
-		printf("L%u: can't swap, stack too short", line_n);
+		fprintf(stderr, "L%u: can't swap, stack too short", line_n);
 		exit(EXIT_FAILURE);
 	}
 	else
@@ -66,7 +66,7 @@ void smul(stack_t **h, unsigned int line_n)
 
 	if (*h == NULL || (*h)->next == NULL)
 	{
-		printf("L%u: can't swap, stack too short", line_n);
+		fprintf(stderr, "L%u: can't swap, stack too short", line_n);
 		exit(EXIT_FAILURE);
 	}
 	else
@@ -92,7 +92,7 @@ void sdiv(stack_t **h, unsigned int line_n)
 
 	if (*h == NULL || (*h)->next == NULL)
 	{
-		printf("L%u: can't swap, stack too short", line_n);
+		fprintf(stderr, "L%u: can't swap, stack too short", line_n);
 		exit(EXIT_FAILURE);
 	}
 	else
@@ -118,7 +118,7 @@ void smod(stack_t **h, unsigned int line_n)
 
 	if (*h == NULL || (*h)->next == NULL)
 	{
-		printf("L%u: can't swap, stack too short", line_n);
+		fprintf(stderr, "L%u: can't swap, stack too short", line_n);
 		exit(EXIT_FAILURE);
 	}
 	else

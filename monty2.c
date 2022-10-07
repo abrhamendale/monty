@@ -48,7 +48,7 @@ void pall(stack_t **h, unsigned int line_n)
 	parse = *h;
 	if (*h == NULL)
 	{
-		printf("L%u Stack empty\n", line_n);
+		fprintf(stderr, "L%u Stack empty\n", line_n);
 		exit(EXIT_FAILURE);
 	}
 	while (parse != NULL)
@@ -70,7 +70,7 @@ void pint(stack_t **h, unsigned int line_n)
 	if (*h != NULL)
 		printf("%d\n", (*h)->n);
 	else
-		printf("L%d: can't pint, stack empty", line_n);
+		fprintf(stderr, "L%d: can't pint, stack empty", line_n);
 	printf("\n");
 }
 /**
@@ -89,7 +89,7 @@ void pop(stack_t **head, unsigned int line_n)
 	parse = *head;
 	if (*head == NULL)
 	{
-		printf("L%d: can't pop an empty stack\n", line_n);
+		fprintf(stderr, "L%d: can't pop an empty stack\n", line_n);
 		exit(EXIT_FAILURE);
 	}
 	while (parse != NULL)
@@ -129,7 +129,7 @@ void swap(stack_t **h, unsigned int line_n)
 
 	if (*h == NULL || (*h)->next == NULL)
 	{
-		printf("L%d: can't swap, stack too short", line_n);
+		fprintf(stderr, "L%d: can't swap, stack too short", line_n);
 		exit(EXIT_FAILURE);
 	}
 	else
