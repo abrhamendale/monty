@@ -21,13 +21,13 @@ int main(int argc, char *argv[])
 	head = NULL;
 	if (argc != 2)
 	{
-		fprintf(stderr, "Usage: %s <file>\n", argv[0]);
+		fprintf(stderr, "Usage:monty %s\n", argv[1]);
 		exit(EXIT_FAILURE);
 	}
 	stream = fopen(argv[1], "r");
 	if (stream == NULL)
 	{
-		printf("Error: Can't open file %s", argv[0]);
+		printf("Error: Can't open file %s", argv[1]);
 		exit(EXIT_FAILURE);
 	}
 	while (nread != -1)
