@@ -156,7 +156,7 @@ int checkline(char *s, stack_t **head, unsigned int *line_n)
 	instruction_t op[] = {{"pall", pall}, {"pint", pint}, {"swap", swap}
 		, {"add", add}, {"pop", pop}, {"sub", _sub}, {"div", _div}, {"mul", _mul}
 		, {"mod", _mod}, {"pchar", pchar}, {"pstr", pstr}, {"rotl", rotl}
-		, {"rotr", rotr}};
+		, {"rotr", rotr}, {"nop", nop}};
 
 	/*printf("----------------Checkline\n");*/
 	for (i = 0 ; i < strlen(s) ; i++)
@@ -173,7 +173,7 @@ int checkline(char *s, stack_t **head, unsigned int *line_n)
 			push(head, _atoi(s, start + i + 4, end + start - 1));
 			return (1);
 		}
-		for (j = 0 ; j <= 12 ; j++)
+		for (j = 0 ; j <= 13 ; j++)
 		{
 			if (checkcmd(s, op[j].opcode, i, *line_n))
 			{

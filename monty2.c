@@ -72,7 +72,10 @@ void pint(stack_t **h, unsigned int line_n)
 	if (*h != NULL)
 		printf("%d", (*h)->n);
 	else
-		fprintf(stderr, "L%d: can't pint, stack empty", line_n);
+	{
+		fprintf(stderr, "L%d: can't pint, stack empty\n", line_n);
+		exit(EXIT_FAILURE);
+	}
 	printf("\n");
 }
 /**
@@ -131,7 +134,7 @@ void swap(stack_t **h, unsigned int line_n)
 
 	if (*h == NULL || (*h)->next == NULL)
 	{
-		fprintf(stderr, "L%d: can't swap, stack too short", line_n);
+		fprintf(stderr, "L%d: can't swap, stack too short\n", line_n);
 		exit(EXIT_FAILURE);
 	}
 	else

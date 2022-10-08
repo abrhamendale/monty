@@ -10,10 +10,21 @@
  */
 void pchar(stack_t **h, unsigned int line_n)
 {
-	if (*h != NULL)
-		printf("%c\n", (*h)->n);
+	if (*h == NULL)
+	{
+		fprintf(stderr, "L%u: can't pchar, stack empty\n", line_n);
+		exit(EXIT_FAILURE);
+	}
 	else
-		fprintf(stderr, "L%u: can't pint, stack empty", line_n);
+	{
+		if ((int)(*h)->n > 127 || (int)(*h)->n < 0)
+		{
+			fprintf(stderr, "L%u: can't pchar, value out of range\n", line_n);
+			exit(EXIT_FAILURE);
+		}
+		else
+			printf("%c\n", (*h)->n);
+	}
 }
 /**
  * nop - prints list element
@@ -45,16 +56,16 @@ void pstr(stack_t **h, unsigned int line_n)
 	stack_t *p;
 
 	p = *h;
-	if (*h == NULL)
-	{
-		fprintf(stderr, "L%u: can't pint, stack empty", line_n);
-		exit(EXIT_FAILURE);
-	}
+	if (*h == NULL && line_n)
+		printf("\n");
 	while (p != NULL)
 	{
 		if (p->n == 0)
 			break;
-		printf("%c", p->n);
+		if ((int)p->n > 127 || p->n < 0)
+			break;
+		else
+			printf("%c", p->n);
 		p = p->next;
 	}
 	printf("\n");
