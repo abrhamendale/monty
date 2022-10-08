@@ -81,7 +81,7 @@ int checkpush(char *s1, int k, int *start, int *end, unsigned int *line_n)
 		}
 		*end = k + 4;
 		/*if (s1[k + 4] == ' ')*/
-		if ((((int)s1[k + 4 + l] >= 48 && (int)s1[k + 4 + l] < 57) ||
+		if ((((int)s1[k + 4 + l] >= 48 && (int)s1[k + 4 + l] <= 57) ||
 					s1[k + 4 + l] == '-') && k + 4 + l < strlen(s1))
 		{
 			for (i = 1 ; s1[k + 4 + i + l] != ' ' && s1[k + 4 + i + l]
@@ -130,7 +130,7 @@ int checkcmd(char *s1, char *s2, int j, unsigned int line_n)
 	}
 	if (s1[j + i] != ' ' && j + i < strlen(s1) - 1)
 	{
-		fprintf(stderr, "L%u:unknown instruction ", line_n);
+		fprintf(stderr, "L%u: unknown instruction ", line_n);
 		for (i = 0 ; j + i < strlen(s1) && s1[j + i] != ' '
 				&& s1[j + i] != '\n'; i++)
 			fprintf(stderr, "%c", s1[j + i]);

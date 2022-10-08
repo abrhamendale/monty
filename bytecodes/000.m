@@ -1,5 +1,6 @@
 push -4
-push -6
+push 6
+pall
 push -9
 push 0
 push 12
