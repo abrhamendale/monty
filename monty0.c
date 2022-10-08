@@ -76,12 +76,12 @@ int checkpush(char *s1, int k, int *start, int *end, unsigned int *line_n)
 			l++;
 		if ((int)(k + 4 + l) == (int)strlen(s1) - 1)
 		{
-			fprintf(stderr, "L%u: usage:push integer\n", *line_n);
+			fprintf(stderr, "L%u:usage:push integer\n", *line_n);
 			return (0);
 		}
 		*end = k + 4;
 		/*if (s1[k + 4] == ' ')*/
-		if ((((int)s1[k + 4 + l] >= 48 && (int)s1[k + 4 + l] < 57) || 
+		if ((((int)s1[k + 4 + l] >= 48 && (int)s1[k + 4 + l] < 57) ||
 					s1[k + 4 + l] == '-') && k + 4 + l < strlen(s1))
 		{
 			for (i = 1 ; s1[k + 4 + i + l] != ' ' && s1[k + 4 + i + l]
@@ -89,7 +89,7 @@ int checkpush(char *s1, int k, int *start, int *end, unsigned int *line_n)
 			{
 				if ((int)s1[k + 4 + i + l] < 48 || (int)s1[k + 4 + i + l] > 57)
 				{
-					fprintf(stderr, "L%u: usage:push integer\n", *line_n);
+					fprintf(stderr, "L%u:usage:push integer\n", *line_n);
 					return (0);
 				}
 				(*end)++;
@@ -99,7 +99,7 @@ int checkpush(char *s1, int k, int *start, int *end, unsigned int *line_n)
 			if (i + 4 + l + k == strlen(s1) || s1[k + 4 + i + l] == '\n'
 					|| s1[k + 4 + i + l] == ' ')
 				return (1);
-			fprintf(stderr, "L%u: usage:push integer\n", *line_n);
+			fprintf(stderr, "L%u:usage:push integer\n", *line_n);
 			exit(EXIT_FAILURE);
 		}
 	}
@@ -111,6 +111,7 @@ int checkpush(char *s1, int k, int *start, int *end, unsigned int *line_n)
  * @s1: Input string
  * @s2: Comman name
  * @j: Starting point of the string
+ * @line_n: Line number
  *
  * Return: Exit status
  */
@@ -129,7 +130,11 @@ int checkcmd(char *s1, char *s2, int j, unsigned int line_n)
 	}
 	if (s1[j + i] != ' ' && j + i < strlen(s1) - 1)
 	{
-		fprintf(stderr, "L%u: unknown instruction %s\n", line_n, s2);
+		fprintf(stderr, "L%u:unknown instruction ", line_n);
+		for (i = 0 ; j + i < strlen(s1) && s1[j + i] != ' '
+				&& s1[j + i] != '\n'; i++)
+			fprintf(stderr, "%c", s1[j + i]);
+		fprintf(stderr, "\n");
 		exit(EXIT_FAILURE);
 	}
 	return (1);

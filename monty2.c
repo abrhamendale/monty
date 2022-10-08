@@ -48,10 +48,10 @@ void pall(stack_t **h, unsigned int line_n)
 	parse = *h;
 	if (*h == NULL && line_n)
 	{
-	/*	
+	/*
 	 *	 fprintf(stderr, "L%u Stack empty\n", line_n);
 	 *	 exit(EXIT_FAILURE);
-	 */	 
+	 */
 	}
 	while (parse != NULL)
 	{
