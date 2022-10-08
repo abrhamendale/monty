@@ -21,7 +21,7 @@ int main(int argc, char *argv[])
 	head = NULL;
 	if (argc != 2)
 	{
-		fprintf(stderr, "USAGE:monty file\n");
+		fprintf(stderr, "USAGE: monty file\n");
 		exit(EXIT_FAILURE);
 	}
 	stream = fopen(argv[1], "r");
