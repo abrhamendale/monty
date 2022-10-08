@@ -154,8 +154,8 @@ int checkline(char *s, stack_t **head, unsigned int *line_n)
 	int start, end;
 	unsigned int i, j;
 	instruction_t op[] = {{"pall", pall}, {"pint", pint}, {"swap", swap}
-		, {"add", add}, {"pop", pop}, {"ssub", ssub}, {"sdiv", sdiv}, {"smul", smul}
-		, {"mod", smod}, {"pchar", pchar}, {"pstr", pstr}, {"rotl", rotl}
+		, {"add", add}, {"pop", pop}, {"sub", _sub}, {"div", _div}, {"mul", _mul}
+		, {"mod", _mod}, {"pchar", pchar}, {"pstr", pstr}, {"rotl", rotl}
 		, {"rotr", rotr}};
 
 	/*printf("----------------Checkline\n");*/
