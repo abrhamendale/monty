@@ -43,7 +43,7 @@ typedef struct instruction_s
 } instruction_t;
 int _atoi(char *format, int k, int l);
 int checkpush(char *s1, int k, int *start, int *end, unsigned int *line_n);
-int checkcmd(char *s1, char *s2, int j);
+int checkcmd(char *s1, char *s2, int j, unsigned int line_n);
 int checkcomment(char *s);
 int checkline(char *s, stack_t **head, unsigned int *line_n);
 stack_t *push(stack_t **head, const int n);

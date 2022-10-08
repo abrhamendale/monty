@@ -70,11 +70,11 @@ int checkpush(char *s1, int k, int *start, int *end, unsigned int *line_n)
 {
 	unsigned int i = 0, l;
 
-	if (checkcmd(s1, "push", k))
+	if (checkcmd(s1, "push", k, *line_n))
 	{
 		for (l = 0 ; s1[k + 4 + l] == ' ' ;)
 			l++;
-		if ((int)(k + 4 + l) == (int)strlen(s1))
+		if ((int)(k + 4 + l) == (int)strlen(s1) - 1)
 		{
 			fprintf(stderr, "L%u: usage:push integer\n", *line_n);
 			return (0);
@@ -87,7 +87,7 @@ int checkpush(char *s1, int k, int *start, int *end, unsigned int *line_n)
 			for (i = 1 ; s1[k + 4 + i + l] != ' ' && s1[k + 4 + i + l]
 					!= '\n' && k + 4 + l + i != strlen(s1) ; i++)
 			{
-				if ((int)s1[k + 4 + i + l] <= 48 || (int)s1[k + 4 + i + l] > 57)
+				if ((int)s1[k + 4 + i + l] < 48 || (int)s1[k + 4 + i + l] > 57)
 				{
 					fprintf(stderr, "L%u: usage:push integer\n", *line_n);
 					return (0);
@@ -115,7 +115,7 @@ int checkpush(char *s1, int k, int *start, int *end, unsigned int *line_n)
  * Return: Exit status
  */
 
-int checkcmd(char *s1, char *s2, int j)
+int checkcmd(char *s1, char *s2, int j, unsigned int line_n)
 {
 	unsigned int i;
 
@@ -126,6 +126,11 @@ int checkcmd(char *s1, char *s2, int j)
 		if (s1[j + i] != s2[i])
 			return (0);
 		continue;
+	}
+	if (s1[j + i] != ' ' && j + i < strlen(s1) - 1)
+	{
+		fprintf(stderr, "L%u: unknown instruction %s\n", line_n, s2);
+		exit(EXIT_FAILURE);
 	}
 	return (1);
 }
@@ -155,13 +160,23 @@ int checkline(char *s, stack_t **head, unsigned int *line_n)
 			return (1);
 		if (checkpush(s, i, &start, &end, line_n))
 		{
+			if (s[i + 1] != ' ' && i > strlen(s) - 4)
+			{
+				printf("L%d: unknown instruction %s\n", *line_n, op[j].opcode);
+				exit(EXIT_FAILURE);
+			}
 			push(head, _atoi(s, start + i + 4, end + start - 1));
 			return (1);
 		}
 		for (j = 0 ; j <= 12 ; j++)
 		{
-			if (checkcmd(s, op[j].opcode, i))
+			if (checkcmd(s, op[j].opcode, i, *line_n))
 			{
+				if (s[i + 4] != ' ' && i > strlen(s) - 4)
+				{
+					printf("L%d: unknown instruction %s\n", *line_n, op[j].opcode);
+					exit(EXIT_FAILURE);
+				}
 				op[j].f(head, *line_n);
 				return (1);
 			}
