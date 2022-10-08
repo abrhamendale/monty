@@ -61,4 +61,5 @@ void smod(stack_t **h, unsigned int line_n);
 void nop(stack_t **h, unsigned int line_n);
 void rotl(stack_t **h, unsigned int line_n);
 void rotr(stack_t **h, unsigned int line_n);
+void free_stack(stack_t *head);
 #endif /* MONTY_H */
