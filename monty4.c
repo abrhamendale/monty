@@ -36,12 +36,10 @@ void pchar(stack_t **h, unsigned int line_n)
  */
 void nop(stack_t **h, unsigned int line_n)
 {
-	if (*h == NULL)
-	{
-		fprintf(stderr, "L%u: stack empty", line_n);
-		exit(EXIT_FAILURE);
-	}
-
+	if (h || line_n)
+		return;
+	else
+		return;
 }
 /**
  * pstr - prints list element
@@ -64,11 +62,11 @@ void pstr(stack_t **h, unsigned int line_n)
 			break;
 		if ((int)p->n > 127 || p->n < 0)
 			break;
-		else
-			printf("%c", p->n);
+		printf("%c", p->n);
 		p = p->next;
 	}
-	printf("\n");
+	if (*h != NULL)
+		printf("\n");
 }
 /**
  * rotl - prints list element
