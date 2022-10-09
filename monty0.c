@@ -76,7 +76,7 @@ int checkpush(char *s1, int k, int *start, int *end, unsigned int *line_n)
 			l++;
 		if ((int)(k + 4 + l) == (int)strlen(s1) - 1)
 		{
-			fprintf(stderr, "L%u: usage: push integer\n", *line_n);
+			fprintf(stderr, " L%u: usage: push integer\n", *line_n);
 			return (0);
 		}
 		*end = k + 4;
@@ -89,7 +89,7 @@ int checkpush(char *s1, int k, int *start, int *end, unsigned int *line_n)
 			{
 				if ((int)s1[k + 4 + i + l] < 48 || (int)s1[k + 4 + i + l] > 57)
 				{
-					fprintf(stderr, "L%u: usage: push integer\n", *line_n);
+					fprintf(stderr, " L%u: usage: push integer\n", *line_n);
 					return (0);
 				}
 				(*end)++;
@@ -99,7 +99,7 @@ int checkpush(char *s1, int k, int *start, int *end, unsigned int *line_n)
 			if (i + 4 + l + k == strlen(s1) || s1[k + 4 + i + l] == '\n'
 					|| s1[k + 4 + i + l] == ' ')
 				return (1);
-			fprintf(stderr, "L%u: usage: push integer\n", *line_n);
+			fprintf(stderr, " L%u: usage: push integer\n", *line_n);
 			exit(EXIT_FAILURE);
 		}
 	}
