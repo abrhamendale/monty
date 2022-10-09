@@ -70,13 +70,15 @@ void pall(stack_t **h, unsigned int line_n)
 void pint(stack_t **h, unsigned int line_n)
 {
 	if (*h != NULL)
-		printf("%d", (*h)->n);
+		printf("%d\n", (*h)->n);
 	else
 	{
 		fprintf(stderr, "L%d: can't pint, stack empty\n", line_n);
 		exit(EXIT_FAILURE);
 	}
-	printf("\n");
+	/*
+	 * printf("\n");
+	 */
 }
 /**
  * pop - deletes list element

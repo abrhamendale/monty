@@ -37,9 +37,13 @@ void pchar(stack_t **h, unsigned int line_n)
 void nop(stack_t **h, unsigned int line_n)
 {
 	if (h || line_n)
-		return;
+	{
+		;
+	}
 	else
-		return;
+	{
+		;
+	}
 }
 /**
  * pstr - prints list element
@@ -82,10 +86,13 @@ void rotl(stack_t **h, unsigned int line_n)
 	int tmp, l = 0;
 
 	p1 = p2 = *h;
-	if (*h == NULL)
+	if (*h == NULL || line_n == 0)
 	{
-		fprintf(stderr, "L%u: can't pint, stack empty", line_n);
-		exit(EXIT_FAILURE);
+	/*
+	 *	fprintf(stderr, "L%u: can't pint, stack empty", line_n);
+	*	exit(EXIT_FAILURE);
+	*/
+		;
 	}
 	tmp = (*h)->n;
 	while (p2->next != NULL)
@@ -111,10 +118,13 @@ void rotr(stack_t **h, unsigned int line_n)
 	int t1, t2, t3;
 
 	p2 = *h;
-	if (*h == NULL)
+	if (*h == NULL || line_n == 0)
 	{
-		fprintf(stderr, "L%u: can't pint, stack empty", line_n);
-		exit(EXIT_FAILURE);
+	/*
+	 *	fprintf(stderr, "L%u: can't pint, stack empty", line_n);
+	 *	exit(EXIT_FAILURE);
+	 */
+		;
 	}
 	while (p2 != NULL)
 	{
