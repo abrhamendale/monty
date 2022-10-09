@@ -97,7 +97,7 @@ void _div(stack_t **h, unsigned int line_n)
 	}
 	if ((*h)->n == 0)
 	{
-		fprintf(stderr, "L%u: division by 0\n", line_n);
+		fprintf(stderr, "L%u: division by zero\n", line_n);
 		exit(EXIT_FAILURE);
 	}
 	else
@@ -128,7 +128,7 @@ void _mod(stack_t **h, unsigned int line_n)
 	}
 	if ((*h)->n == 0)
 	{
-		fprintf(stderr, "L%u: division by 0\n", line_n);
+		fprintf(stderr, "L%u: division by zero\n", line_n);
 		exit(EXIT_FAILURE);
 	}
 	else
